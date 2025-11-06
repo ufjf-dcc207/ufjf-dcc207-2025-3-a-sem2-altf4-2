@@ -1,13 +1,14 @@
 import './Carta.css'
 import './imagem.css'
-
 import Texto from './Componentes/Texto.tsx';
 import Imagem from './Componentes/imagem.tsx';
 import type {CartaData} from './Deck';
 import Atributo from './Componentes/atributo.tsx';  
+import Nivel from './Componentes/Nivel.tsx';
 
 export default function Carta({
     nome='Nome',
+    nivel=1,
     alinhanome='centro',
     alinhadescricao='esquerda',
     ataque=1000,
@@ -25,6 +26,8 @@ export default function Carta({
             <div className="Repartedor">
 
                 <Texto conteudo={nome} classe='Nome' tamanho='grande' alinhamento={alinhanome} />
+
+                <Nivel nivel={nivel} />
 
                 <Imagem imagem={imagemUrl} espelhado={espelharImagem} colorido={corImagem} girado={girarImagem} />
 

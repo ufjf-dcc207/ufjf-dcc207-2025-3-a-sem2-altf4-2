@@ -11,6 +11,7 @@ function App() {
           <Carta 
             key={carta.serial}
             nome={carta.nome}
+            nivel={carta.nivel}
             ataque={carta.ataque}
             defesa={carta.defesa}
             descricao={carta.descricao}

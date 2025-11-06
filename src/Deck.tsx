@@ -3,6 +3,7 @@ import SamuraiImg from './assets/template/samurai.png';
 export interface CartaData {
   serial?: number;
   nome?: string;
+  nivel?: number;
   ataque?: number;
   defesa?: number;
   descricao?: string;
@@ -19,6 +20,7 @@ export const todasCartas: CartaData[] = [
   {
     serial: 1,
     nome: 'Godfrey',
+    nivel: 3,
     ataque: 8000,
     defesa: 1500,
     descricao: 'O primeiro Lorde Pristino.',
