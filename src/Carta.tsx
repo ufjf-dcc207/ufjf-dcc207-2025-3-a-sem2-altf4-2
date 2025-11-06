@@ -1,6 +1,7 @@
 import './Carta.css'
 import './imagem.css'
 import Texto from './Componentes/Texto';
+import Imagem from './Componentes/imagem';
 
 interface CartaProps{
     nome?: string;
@@ -10,6 +11,7 @@ interface CartaProps{
     defesa?: number;
     descricao?: string;
     tamanho?: 'pequena' | 'media' | 'grande';
+    imagem?: string;
 }
 
 export default function Carta({
@@ -20,6 +22,7 @@ export default function Carta({
     defesa=1000,
     descricao='',
     tamanho='pequena',
+    imagem = '',
 }: CartaProps){
     return (
         <div className="carta">
@@ -27,8 +30,9 @@ export default function Carta({
                 <div>
                     <Texto conteudo={nome} classe='Nome' tamanho='grande' alinhamento={alinhanome} />
                 </div>
-                <div className='imagem'>
-                </div>
+                
+                <Imagem imagem={imagem}/>
+                
                 <div>
                     <Texto conteudo={descricao} classe='desc' tamanho={tamanho} alinhamento={alinhadescricao} />
                 </div>
