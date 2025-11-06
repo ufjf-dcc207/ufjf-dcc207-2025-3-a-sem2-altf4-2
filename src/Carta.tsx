@@ -1,31 +1,35 @@
 import './Carta.css'
+import Texto from './Componentes/Texto';
 
-interface CartaProps = {
+interface CartaProps{
     nome?: string;
     ataque?: number;
     defesa?: number;
     descricao?: string;
+    tamanho?: 'pequena' | 'media' | 'grande';
+    alinha?: 'esquerda' | 'centro' | 'direita';
 }
 
 export default function Carta({
     nome='Nome',
     ataque=1000,
     defesa=1000,
-    descricao=''}: CartaProps){
+    descricao='',
+    tamanho='media',
+    alinha='centro',
+}: CartaProps){
     return (
         <div className="carta">
-<<<<<<< HEAD
-=======
-            {/*se possivel fazer interação de ao clicar mostrar a capa da carta*/}
->>>>>>> 8b95e437903c4e09bb376c2a6c83964886de329d
-            <div className="frente">
-                <div className='Nome'>{nome}</div>
-                <div className='desc'>{descricao}</div>
+            <div className="Repartedor">
+                <div className='Nome'>
+                    <Texto conteudo={nome} tamanho='grande' alinhamento={alinha} />
+                </div>
+                <div className='desc'>
+                    <Texto conteudo={descricao} tamanho={tamanho} alinhamento={alinha} />
+                </div>
                 <div className='ataque'>{ataque}</div>
                 <div className='defesa'>{defesa}</div>
             </div>
         </div>
     )
 }
-
-export default Carta;
