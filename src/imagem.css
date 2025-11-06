@@ -1,0 +1,6 @@
+.imagem{
+    position: absolute;
+    background-image: url(assets/template/samurai.png);
+    width: 80%;
+    background-size: 100% 100%;
+}
