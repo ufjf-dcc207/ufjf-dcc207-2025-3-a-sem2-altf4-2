@@ -6,6 +6,9 @@ import { todasCartas } from './Deck'
 function App() {
   return (
     <>
+      <header className="titulo">
+      <h1>CardMaker</h1>
+    </header>
       <div className='ListaCartas'>
         {todasCartas.map((carta) =>(
           <Carta 
