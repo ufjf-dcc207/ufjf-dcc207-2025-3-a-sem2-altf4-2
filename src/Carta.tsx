@@ -3,6 +3,7 @@ import './imagem.css'
 import Texto from './Componentes/Texto.tsx';
 import Imagem from './Componentes/imagem.tsx';
 import type {CartaData} from './Deck';
+import Atributo from './Componentes/atributo.tsx';  
 
 export default function Carta({
     nome='Nome',
@@ -27,9 +28,11 @@ export default function Carta({
                 <Imagem imagem={imagemUrl} espelhado={espelharImagem} colorido={corImagem} girado={girarImagem} />
 
                 <Texto conteudo={descricao} classe='desc' tamanho={tamanho} alinhamento={alinhadescricao} />
-              
-                <div className='ataque'>ATK/{ataque}</div>
-                <div className='defesa'>DEF/{defesa}</div>
+
+                <Atributo tipo = "ataque" valor = {ataque}/>
+
+                <Atributo tipo = "defesa" valor = {defesa}/>
+
             </div>
         </div>
     )

@@ -43,15 +43,12 @@
 
 .Repartedor .ataque{
     position: absolute;
-    right: 27%;
+    right: 30%;
     bottom: 5%;
-    font-size: 12px;
 }
 
 .Repartedor .defesa{
     position: absolute;
     right: 8%;      
     bottom: 5%;    
-    font-size: 12px;
-  
 }
