@@ -21,11 +21,11 @@ export default function Carta({
     return (
         <div className="carta">
             <div className="Repartedor">
-                <div className='Nome'>
-                    <Texto conteudo={nome} tamanho='grande' alinhamento={alinha} />
+                <div>
+                    <Texto conteudo={nome} classe='Nome' tamanho='grande' alinhamento={alinha} />
                 </div>
-                <div className='desc'>
-                    <Texto conteudo={descricao} tamanho={tamanho} alinhamento={alinha} />
+                <div>
+                    <Texto conteudo={descricao} classe='desc' tamanho={tamanho} alinhamento={alinha} />
                 </div>
                 <div className='ataque'>{ataque}</div>
                 <div className='defesa'>{defesa}</div>

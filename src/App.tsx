@@ -6,7 +6,7 @@ function App() {
     <>
     <div className='ListaCartas'>
       <Carta nome="Godfrey" ataque={2000} defesa={1500} descricao="O primeiro Lorde Pristino." />
-      <Carta nome='Malenia' ataque={4000} defesa={700}  descricao='A espada de Miquella'/>
+      <Carta nome='Malenia' ataque={4000} defesa={700} tamanho='media' alinha='esquerda'  descricao='A espada de Miquella'/>
     </div>
     </>
   )
