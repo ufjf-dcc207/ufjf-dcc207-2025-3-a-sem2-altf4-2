@@ -1,4 +1,5 @@
 import './Carta.css'
+import './imagem.css'
 import Texto from './Componentes/Texto';
 
 interface CartaProps{
@@ -26,15 +27,8 @@ export default function Carta({
                 <div>
                     <Texto conteudo={nome} classe='Nome' tamanho='grande' alinhamento={alinhanome} />
                 </div>
-<<<<<<< HEAD
-                
-=======
-
                 <div className='imagem'>
-                    
                 </div>
-
->>>>>>> fd3d745a69a7629e3ca6b7b14aa71372e973bf21
                 <div>
                     <Texto conteudo={descricao} classe='desc' tamanho={tamanho} alinhamento={alinhadescricao} />
                 </div>
