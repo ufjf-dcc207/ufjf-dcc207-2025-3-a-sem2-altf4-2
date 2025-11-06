@@ -1,20 +1,18 @@
 .carta {
     position: relative;
     width: 320px;
-    height:  450px;
+    height: 450px;
     max-width: 100%;
     aspect-ratio: 320 / 450;
-    background-image: url('./assets/template/Normal.png');
+    background-image: url(/ufjf-dcc207-2025-3-a-sem01-altf4/src/assets/template/Normal.png);
     background-size: 100% 100%;
-    background-position: center;   
     background-repeat: no-repeat;
-    border: 1px solid rgba(0,0,0,0.08);
+    border: 1px solid rgba(0, 0, 0, 0.08);
     box-sizing: border-box;
-    display: flex;
     flex-direction: column;
     align-items: stretch;
     justify-content: flex-start;
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
 .Repartedor{    
@@ -24,7 +22,6 @@
     justify-content: flex-start;
 }
 .Repartedor .Nome {
-    font-size: clamp(19px, 2vw , 25px);
     position: absolute;
     width: 78%;
     top: 3%;
