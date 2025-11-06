@@ -1,7 +1,7 @@
 import './Carta.css'
 import './imagem.css'
 import Texto from './Componentes/Texto.tsx';
-import Imagem from './Componentes/Imagem.tsx';
+import Imagem from './Componentes/imagem.tsx';
 
 interface CartaProps{
     nome?: string;
