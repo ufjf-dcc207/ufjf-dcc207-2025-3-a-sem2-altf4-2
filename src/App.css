@@ -10,3 +10,30 @@
   background: rgb(35, 34, 53);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.315);
 }
+.deck-titulo {
+  display: flex;
+  color: white;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.setinha-esq,
+.setinha-dir {
+  font-size: 2rem;
+  cursor: pointer;
+  color: white;
+  transition: transform 0.25s ease, color 0.2s ease;
+  user-select: none;
+}
+
+.setinha-esq:hover {
+  transform: translateX(-6px);
+  color: rgb(180, 180, 255);
+}
+
+.setinha-dir:hover {
+  transform: translateX(6px);
+  color: rgb(180, 180, 255);
+}
