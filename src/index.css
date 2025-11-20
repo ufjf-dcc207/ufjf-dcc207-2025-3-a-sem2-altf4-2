@@ -4,7 +4,7 @@
   font-weight: 400;
   place-content: center;
   min-height: 100vh;
-  background-color: rgb(235, 235, 235);
+  background-color: rgb(47, 46, 71);
 
 }
 @font-face {
@@ -20,7 +20,7 @@
   margin: 40px 0;
   margin: 50px;
   font-family: 'Times New Roman', Times, serif;
-  font-size: 8vw;
-  color: #111;
+  font-size: 4vw;
+  color: #ffffff;
   font-weight: 600;
 }
