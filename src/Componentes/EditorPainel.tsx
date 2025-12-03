@@ -1,29 +1,28 @@
 import type { ChangeEvent} from 'react';
 import { useState } from 'react';
 import type { Elemento } from './interfaces.tsx';
-import Edicao from './Edicao.tsx';
+import EdicaoInputs from './EdicaoInputs.tsx';
 
 interface EditorPanelProps {
   elementoAtivo?: Elemento;
-  onUpdate: (id: number, chave: string, valor: string | number) => void;
-  onAdd: (tipo: 'texto' | 'imagem') => void;
+  onAtualizaElemento: (id: number, chave: string, valor: string | number) => void;
+  onAddElemento: (tipo: 'texto' | 'imagem') => void;
 }
 
 
-export default function EditorPanel({ elementoAtivo, onUpdate, onAdd }: EditorPanelProps) {
-
+export default function EditorPanel({ elementoAtivo, onAtualizaElemento, onAddElemento }: EditorPanelProps) {
   const [menuAberto, setMenuAberto] = useState(false);
   
-  const SelecionaElemento = (e: ChangeEvent<HTMLInputElement>) => {
+  const SelecionaElemento = (e: ChangeEvent<HTMLInputElement>) => 
+  {
     const { name, value } = e.target;
-
     if (elementoAtivo) {
-      onUpdate(elementoAtivo.id, name, value);
+      onAtualizaElemento(elementoAtivo.id, name, value);
     }
   };
 
   const adicionarElemento = (tipo: 'texto' | 'imagem') => {
-    onAdd(tipo);
+    onAddElemento(tipo);
     setMenuAberto(false);
   };
 
@@ -35,9 +34,8 @@ export default function EditorPanel({ elementoAtivo, onUpdate, onAdd }: EditorPa
         onClick={() => setMenuAberto(!menuAberto)}
         title="Adicionar elemento"
       >
-        +
+      +
       </button>
-
 
       {menuAberto && (
         <div className="menu-adicionar">
@@ -46,7 +44,7 @@ export default function EditorPanel({ elementoAtivo, onUpdate, onAdd }: EditorPa
         </div>
       )}
 
-      {elementoAtivo && <Edicao elemento={elementoAtivo} onChange={SelecionaElemento} />}
+      {elementoAtivo && <EdicaoInputs elemento={elementoAtivo} onAtualizarElemento={SelecionaElemento} />}
     </div>
   );
 }

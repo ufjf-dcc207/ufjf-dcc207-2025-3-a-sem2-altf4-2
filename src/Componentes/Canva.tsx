@@ -3,10 +3,10 @@ import type { Elemento } from "./interfaces.tsx";
 
 interface CanvaProps {
     elementos: Elemento[];
-    onSelect: (id: number) => void;
+    selecionada: (id: number) => void;
 }
 
-export default function Canva({elementos, onSelect}: CanvaProps) {
+export default function Canva({elementos, selecionada}: CanvaProps) {
     if (elementos.length === 0) return <div className="canva-vazio">Adicione algo...</div>;
     return (
         <div className="card-moldura">
@@ -31,10 +31,10 @@ export default function Canva({elementos, onSelect}: CanvaProps) {
                         objectFit: 'fill'
                     };
                     return <img key={item.id} src={item.conteudo} style={imgStyle} 
-                        className="item-movel" onClick={() => onSelect(item.id)} />;
+                        className="item-movel" onClick={() => selecionada(item.id)} />;
                 }
                 return <div key={item.id} style={style} className="item-movel"
-                    onClick={() => onSelect(item.id)}>{item.conteudo}</div>;
+                    onClick={() => selecionada(item.id)}>{item.conteudo}</div>;
             })}
             
         </div>
