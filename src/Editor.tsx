@@ -2,6 +2,7 @@
 import Carta from "./Componentes/Carta";
 import type { Elemento } from "./Componentes/interfaces";
 import EditorPanel from "./Componentes/EditorPainel";
+import EditorOpcoes from "./Componentes/EditorOpcoes";
 
 
 export interface EditorProps {
@@ -22,6 +23,8 @@ EditorProps) {
         <button onClick={()=>defineTela("inicial")}>Voltar</button>
        
         <div className="editorCentral">
+            <EditorOpcoes cartaId = {0} salvaCarta={()=>{}} apagaCarta={()=>{}} duplicaCarta={()=>{}}/>
+
             <Carta elementos={elementosAtuais} elementoSelecionada={selecionarElemento} />
             
             <EditorPanel 
@@ -29,6 +32,11 @@ EditorProps) {
             onAtualizaElemento={modificarElemento}
             elementoAtivo={elementoSelecionado}
             />
+        </div>
+        <div className="botoesEditor">
+            <button>Salvar</button>
+            <button>Apagar</button>
+            <button>Excluir</button>
         </div>
     </div>
 
