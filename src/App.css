@@ -36,7 +36,33 @@
   box-shadow: 0px -4px 15px rgba(0, 0, 0, 0.226);
 }
 
+.inicial {
+  margin-left: 10px;
+}
 
+.editor {
+  margin-left: 10px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 
+------------------------------------------
+CSS do DECK para ser reutilizado no final
+------------------------------------------
+*/
 .titulo-deck {
   color: white;
   font-weight: 600;
