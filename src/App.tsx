@@ -22,15 +22,43 @@ const novoElemento = (tipo: 'texto' | 'imagem'): Elemento => {
 function App() {
 const[tela, defineTela] = useState<'inicial' | 'editor'>('inicial');
 const[cartasSalvas,defineCartasSalvas] = useState<Cartas[]>([]);
+const[cartaIdAtual, defineCartaIdAtual] = useState<number | null>(null);
 const[elementos, defineElementos] = useState<Elemento[]>([]);
-const [idSelecionado, setIdSelecionado] = useState<number | null>(null);
+const [idSelecionado, defineIdSelecionado] = useState<number | null>(null);
 const[baralhosSalvos, defineBaralhosSalvos] = useState<Baralho[]>([]);
+
+const salvarCarta= () => {
+  if(cartaIdAtual) {
+  defineCartasSalvas(prev=>prev.map(carta => carta.id === cartaIdAtual ? {...carta, dados: elementos} : carta));
+  }else{
+    const novaCarta: Cartas = {
+      id: Date.now(),
+      dados: elementos,
+    };
+    defineCartasSalvas([...cartasSalvas, novaCarta]);
+    defineTela('inicial');
+  }
+}
+const apagarCarta= ()=> {
+  if(cartaIdAtual) {
+    defineCartasSalvas(prev=> prev.filter(carta=> carta.id !== cartaIdAtual));
+    defineTela('inicial');
+  }
+}
+
+const duplicarCarta= () => {
+  const cartaDuplicada: Cartas = {
+    id: Date.now(), dados: elementos.map(elemento=>({...elemento, id: Date.now() + Math.random()}))
+  }
+  defineCartasSalvas([...cartasSalvas, cartaDuplicada]);
+  defineTela('inicial');
+}
 
 const adicionarElemento= (tipo: 'texto' | 'imagem') =>
 {
   const elemento = novoElemento(tipo);
   defineElementos(elementos => [...elementos, elemento]);
-  setIdSelecionado(elemento.id);
+  defineIdSelecionado(elemento.id);
 }
 const modificarElementos= (id: number, chave: string, valor: string | number) => 
 {
@@ -38,16 +66,18 @@ const modificarElementos= (id: number, chave: string, valor: string | number) =>
 }
 const novaCarta = () => {
   defineElementos([]);
+  defineCartaIdAtual(null);
+  defineIdSelecionado(null);
   defineTela('editor');
 }
 const editarCarta = (carta: Cartas) => {
   defineElementos(carta.dados);
-  setIdSelecionado(null);
+  defineIdSelecionado(null);
   defineTela('editor');
 }
 
 const selecionarId = (id: number) => {
-  setIdSelecionado(id);
+  defineIdSelecionado(id);
 }
   return (
     <div className="app">
@@ -59,7 +89,8 @@ const selecionarId = (id: number) => {
       <Inicial cartasSalvas={cartasSalvas} novaCarta={novaCarta} editarCarta={editarCarta} />
     ) : (
       <Editor defineTela={defineTela} elementosAtuais={elementos} idSelecionado={idSelecionado} 
-      selecionarElemento={selecionarId} adicionarElemento={adicionarElemento} modificarElemento={modificarElementos} />
+      selecionarElemento={selecionarId} adicionarElemento={adicionarElemento} modificarElemento={modificarElementos}
+      salvarCarta={salvarCarta} apagarCarta={apagarCarta} duplicarCarta={duplicarCarta} cartaIdAtual={cartaIdAtual}/>
     )}
       <footer className="footer">
         <p>CardMaker 2025.</p>

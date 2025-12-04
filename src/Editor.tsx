@@ -12,9 +12,15 @@ export interface EditorProps {
     selecionarElemento: (id: number) => void;
     adicionarElemento: (tipo: 'texto' | 'imagem') => void;
     modificarElemento: (id: number, chave: string, valor: string | number) => void;
+    salvarCarta: () => void;
+    apagarCarta: () => void;
+    duplicarCarta: () => void;
+    cartaIdAtual:number | null;
 }
 
-export default function Editor({defineTela,elementosAtuais,idSelecionado,selecionarElemento, adicionarElemento, modificarElemento}:
+export default function Editor({defineTela,elementosAtuais,idSelecionado,
+    selecionarElemento, adicionarElemento, modificarElemento, 
+    salvarCarta, apagarCarta, duplicarCarta, cartaIdAtual}:
 EditorProps) {
     const elementoSelecionado = elementosAtuais.find(element => element.id === idSelecionado);
     return (    
@@ -23,7 +29,7 @@ EditorProps) {
         <button onClick={()=>defineTela("inicial")}>Voltar</button>
        
         <div className="editorCentral">
-            <EditorOpcoes cartaId = {0} salvaCarta={()=>{}} apagaCarta={()=>{}} duplicaCarta={()=>{}}/>
+            <EditorOpcoes cartaId = {cartaIdAtual} salvarCarta={salvarCarta} apagarCarta={apagarCarta} duplicarCarta={duplicarCarta}/>
 
             <Carta elementos={elementosAtuais} elementoSelecionada={selecionarElemento} />
             
@@ -32,11 +38,6 @@ EditorProps) {
             onAtualizaElemento={modificarElemento}
             elementoAtivo={elementoSelecionado}
             />
-        </div>
-        <div className="botoesEditor">
-            <button>Salvar</button>
-            <button>Apagar</button>
-            <button>Excluir</button>
         </div>
     </div>
 
