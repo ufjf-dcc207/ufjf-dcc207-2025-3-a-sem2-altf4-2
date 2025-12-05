@@ -16,10 +16,10 @@ export default function EdicaoInputs({elemento, onAtualizarElemento}: EdicaoInpu
             <input type="text" name="conteudo" value={elemento.conteudo} onChange={onAtualizarElemento} />
 
             <label >Posição Horizontal</label>
-            <input type="range" name="posicaoHorizontal" min={-25} max={380} value={elemento.posicaoHorizontal} onChange={onAtualizarElemento} />
+            <input type="range" name="posicaoHorizontal" min={-25} max={400} value={elemento.posicaoHorizontal} onChange={onAtualizarElemento} />
 
             <label >Posição Vertical</label>
-            <input type="range" name="posicaoVertical" min={-40} max={500} value={elemento.posicaoVertical} onChange={onAtualizarElemento} />
+            <input type="range" name="posicaoVertical" min={-40} max={550} value={elemento.posicaoVertical} onChange={onAtualizarElemento} />
 
             {elemento.tipo === 'texto' && (
             <>

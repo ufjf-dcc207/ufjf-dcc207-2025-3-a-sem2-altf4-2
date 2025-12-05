@@ -1,7 +1,7 @@
 import Canva from "./Canva";
 import "../Estilos/Carta.css";
 import type { Elemento } from "./interfaces";
-import { useState, type CSSProperties } from "react";
+import type {CSSProperties } from "react";
 
 interface CartaComponenteProps {
     elementos: Elemento[];

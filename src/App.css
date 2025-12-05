@@ -53,6 +53,27 @@
   margin-top: 24px;
 }
 
+.exibeCartas{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-content: center;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 30px;
+}
+.cartaInicial{
+  cursor: pointer;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  position: relative;
+  width: 200px;
+  height: 280px;
+}
+.cartaMiniatura {
+   transform: scale(0.5);
+  transform-origin: top left;
+}
 
 
 

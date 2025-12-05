@@ -1,6 +1,6 @@
 //tela inicial onde são mostradas todas as cartas, se houver, no baralho. Ao selecionar alguma, muda para a tela do editor
 import type {Baralho, Cartas} from './Componentes/interfaces.tsx';
-import Canva from './Componentes/Canva.tsx';
+import Carta from './Componentes/Carta.tsx';
 
 interface InicialProps {
     cartasSalvas: Cartas[];
@@ -17,15 +17,15 @@ export default function Inicial({cartasSalvas, novaCarta, editarCarta}: InicialP
         <div>
             <h2>Nome do baralho!</h2>
             <button onClick={() => novaCarta()}>Criar Nova Carta</button>
-            <div className="deck-grid">
+            <div className="exibeCartas">
                 {cartasSalvas.map(c => (
                 <div 
                 key={c.id} 
                 className="cartaInicial" 
                 onClick={() => editarCarta(c)}
                 >
-                <div>
-                    <Canva elementos={c.dados} selecionada={() => {}} />
+                <div className="cartaMiniatura">
+                    <Carta elementos={c.dados} cor={c.cor} elementoSelecionada={()=>{}}  />
                 </div>
                 </div>
                 ))}
