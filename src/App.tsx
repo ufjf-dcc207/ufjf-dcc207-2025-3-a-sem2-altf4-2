@@ -36,8 +36,8 @@ const salvarCarta= () => {
       dados: elementos,
     };
     defineCartasSalvas([...cartasSalvas, novaCarta]);
-    defineTela('inicial');
   }
+  defineTela('inicial');
 }
 const apagarCarta= ()=> {
   if(cartaIdAtual !== null) {
@@ -48,8 +48,9 @@ const apagarCarta= ()=> {
 
 const duplicarCarta= () => {
   const cartaDuplicada: Cartas = {
-    id: Date.now(), dados: elementos.map(elemento=>({...elemento, id: Date.now() + Math.random()}))
+    id: Date.now(), dados: elementos
   }
+  defineCartaIdAtual(cartaDuplicada.id);
   defineCartasSalvas([...cartasSalvas, cartaDuplicada]);
   defineTela('inicial');
 }
