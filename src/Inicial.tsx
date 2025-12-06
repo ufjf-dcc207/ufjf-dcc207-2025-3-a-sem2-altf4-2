@@ -6,6 +6,7 @@ interface InicialProps {
     cartasSalvas: Cartas[];
     novaCarta: () => void;
     editarCarta: (carta: Cartas) => void;
+    voltarMenu?: () => void;
 }
 
 export default function Inicial({cartasSalvas, novaCarta, editarCarta}: InicialProps) {

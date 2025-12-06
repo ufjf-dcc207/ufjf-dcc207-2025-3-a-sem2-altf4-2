@@ -117,10 +117,13 @@
 CSS do DECK para ser reutilizado no final - Caniato mexe Aqui
 ------------------------------------------
 */
+
 .titulo-deck {
   color: white;
   font-weight: 600;
   text-align: center;
+  font-size: 2rem;
+  margin-bottom: 16px;
 }
 
 .topo-controles {
@@ -130,13 +133,44 @@ CSS do DECK para ser reutilizado no final - Caniato mexe Aqui
   align-items: center;
   justify-content: center;
   gap: 12px;
-  margin: 18px 0;
+  margin-bottom: 24px;
 }
 
-.topo-controles .btn-novo-deck,
-.topo-controles .btn-adicionar,
-.topo-controles .nav-seta,
-.topo-controles button {
+
+.input-baralho {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.05);
+  color: white;
+  font-weight: 500;
+  width: 220px;
+  outline: none;
+}
+
+.input-baralho::placeholder {
+  color: rgba(255,255,255,0.5);
+}
+
+.btn-voltar {
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.2);
+    background: rgba(28, 27, 43, 0.6);
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s ease, background 0.2s ease;
+    margin-bottom: 12px;
+}
+
+.btn-voltar:hover {
+    transform: translateY(-2px);
+    background: rgba(28, 27, 43, 0.8);
+}
+
+
+.btn-novo-deck, .btn-criar {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -148,51 +182,64 @@ CSS do DECK para ser reutilizado no final - Caniato mexe Aqui
   background: rgba(255,255,255,0.03);
   color: white;
   font-weight: 600;
+  transition: transform 0.2s ease, background 0.2s ease;
 }
 
-.topo-controles .btn-adicionar {
-  background: rgb(28, 27, 43);
-  border: none;
-  color: white;
+.btn-novo-deck:hover, .btn-criar:hover {
+  transform: translateY(-2px);
+  background: rgba(255,255,255,0.1);
 }
-.topo-controles .btn-adicionar:hover { transform: translateY(-2px); }
 
-.topo-controles .nav-seta {
-  background: transparent;
-  border: 2px solid rgba(255,255,255,0.06);
-  color: white;
-  padding: 6px 10px;
-  border-radius: 8px;
-  font-size: 18px;
-}
-.topo-controles .nav-seta:hover { transform: translateY(-2px); }
 
-.deck-titulo {
-  width: 100%;
+.lista-baralhos {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
   gap: 12px;
-  margin-top: 8px;
-  color: white;
+  width: 100%;
 }
 
-.setinha-esq,
-.setinha-dir {
-  font-size: 2rem;
+.item-baralho {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  border-radius: 10px;
+  background: rgba(28, 27, 43, 0.6);
   cursor: pointer;
-  color: white;
-  transition: transform 0.25s ease, color 0.2s ease;
-  user-select: none;
+  transition: transform 0.2s ease, background 0.2s ease;
 }
 
-.setinha-esq:hover { transform: translateX(-6px); color: rgb(180,180,255); }
-.setinha-dir:hover { transform: translateX(6px); color: rgb(180,180,255); }
+.item-baralho:hover {
+  transform: translateY(-2px);
+  background: rgba(28, 27, 43, 0.8);
+}
+
+.item-baralho p {
+  margin: 0;
+  font-weight: 600;
+  color: white;
+}
+
+.item-baralho small {
+  color: rgba(255,255,255,0.7);
+}
+
+.vazio {
+  color: rgba(255,255,255,0.5);
+  text-align: center;
+  font-style: italic;
+}
 
 @media (max-width: 720px) {
   .topo-controles {
     gap: 8px;
     padding: 0 12px;
   }
-  .ListaCartas { gap: 12px; padding: 12px; }
+  .lista-baralhos {
+    gap: 10px;
+  }
+  .input-baralho {
+    width: 160px;
+  }
 }
+

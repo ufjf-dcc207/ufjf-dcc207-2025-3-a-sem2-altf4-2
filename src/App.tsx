@@ -1,8 +1,10 @@
 import './App.css'
 import { useState } from 'react'
+import Baralho from './Baralho.tsx'
 import Inicial from './Inicial.tsx'
 import Editor from './Editor.tsx'
-import type { Cartas, Elemento, Baralho} from './Componentes/interfaces.tsx';
+import type { Cartas, Elemento, Baralho as BaralhoTipo } from './Componentes/interfaces.tsx'
+
 
 
 const novoElemento = (tipo: 'texto' | 'imagem'): Elemento => {
@@ -20,24 +22,61 @@ const novoElemento = (tipo: 'texto' | 'imagem'): Elemento => {
 }
 
 function App() {
-  const[tela, defineTela] = useState<'inicial' | 'editor'>('inicial');
+  const[tela, defineTela] = useState<'baralho' | 'inicial' | 'editor'>('baralho');
+
+  const [baralhoAtual, defineBaralhoAtual] = useState<BaralhoTipo | null>(null);
+  const[baralhosSalvos, defineBaralhosSalvos] = useState<BaralhoTipo[]>([]);
+  
+
   const[cartasSalvas,defineCartasSalvas] = useState<Cartas[]>([]);
+
   const[corAtual, defineCorAtual] = useState<string>('#ffffff');
   const[cartaIdAtual, defineCartaIdAtual] = useState<number | null>(null);
   const[elementos, defineElementos] = useState<Elemento[]>([]);
   const [idSelecionado, defineIdSelecionado] = useState<number | null>(null);
-  const[baralhosSalvos, defineBaralhosSalvos] = useState<Baralho[]>([]);
+
+  const criarBaralho = (nome: string) => {
+    const novo: BaralhoTipo = {
+      id: Date.now(),
+      nome,
+      cartas: []
+    }
+    defineBaralhosSalvos(prev => [...prev, novo])
+  }
   
+  const abrirBaralho = (b: BaralhoTipo) => {
+    defineBaralhoAtual(b);
+    defineCartasSalvas(b.cartas);
+    defineTela('inicial');
+  }
+
+  const salvarBaralho = (cartas: Cartas[]) => {
+  if (!baralhoAtual) return;
+
+  const atualizado: BaralhoTipo = {
+    id: baralhoAtual.id,
+    nome: baralhoAtual.nome,
+    cartas
+  };
+
+  defineBaralhoAtual(atualizado);
+
+  defineBaralhosSalvos(prev => {
+    return prev.map(item => item.id === atualizado.id ? atualizado : item);
+  });
+};
+
+
   const selecionarId = (id: number) => {
   defineIdSelecionado(id);
   }
-const atualizarCor = (cor: string) => {
+  const atualizarCor = (cor: string) => {
         defineCorAtual(cor);
     }
-const salvarCarta= () => {
-  if(cartaIdAtual) {
-  defineCartasSalvas(prev=>prev.map(carta => carta.id === cartaIdAtual ? {...carta, dados: elementos} : carta));
-  }else{
+  const salvarCarta= () => {
+    if(cartaIdAtual) {
+      defineCartasSalvas(prev=>prev.map(carta => carta.id === cartaIdAtual ? {...carta, dados: elementos} : carta));
+    }else{
     const novaCarta: Cartas = {
       id: Date.now(),
       dados: elementos,
@@ -47,83 +86,111 @@ const salvarCarta= () => {
   }
   defineTela('inicial');
 }
-const apagarCarta= ()=> {
-  if(cartaIdAtual !== null) {
-    defineCartasSalvas(prev=> prev.filter(carta=> carta.id !== cartaIdAtual));
-    defineTela('inicial');
+  const apagarCarta= ()=> {
+    if(cartaIdAtual !== null) {
+      defineCartasSalvas(prev=> prev.filter(carta=> carta.id !== cartaIdAtual));
+      defineTela('inicial');
   }
 }
 
-const duplicarCarta = () => {
-  defineCartasSalvas(prev => {
-    if (!prev || prev.length === 0) return prev;
+  const duplicarCarta = () => {
+    defineCartasSalvas(prev => {
+      if (!prev || prev.length === 0) return prev;
 
-    let indice = cartaIdAtual != null ? prev.findIndex(c => c.id === cartaIdAtual) : -1;
+      let indice = cartaIdAtual != null ? prev.findIndex(c => c.id === cartaIdAtual) : -1;
 
-    if (indice === -1) indice = prev.length - 1;
+      if (indice === -1) indice = prev.length - 1;
 
-    const cartaOrig = prev[indice];
-    const copia = {
-      id: Date.now(),
-      dados: cartaOrig.dados,
-      cor: cartaOrig.cor
-    };
+      const cartaOrig = prev[indice];
+      const copia = {
+        id: Date.now(),
+        dados: cartaOrig.dados,
+        cor: cartaOrig.cor
+      };
 
-    const nova = [...prev];
-    nova.splice(indice + 1, 0, copia);
-    return nova;
-  });
+      const nova = [...prev];
+      nova.splice(indice + 1, 0, copia);
+      return nova;
+    });
 
-  const novoId = Date.now();
-  defineCartaIdAtual(novoId);
-  defineTela('inicial');
-};
+    const novoId = Date.now();
+    defineCartaIdAtual(novoId);
+    defineTela('inicial');
+  };
 
 
-const adicionarElemento= (tipo: 'texto' | 'imagem') =>
-{
-  const elemento = novoElemento(tipo);
-  defineElementos(elementos => [...elementos, elemento]);
-  defineIdSelecionado(elemento.id);
-}
-const modificarElementos= (id: number, chave: string, valor: string | number) => 
-{
-  defineElementos(prev => prev.map(element => element.id === id? {...element, [chave]: valor} : element));
-}
-const novaCarta = () => {
-  defineElementos([]);
-  defineCartaIdAtual(null);
-  defineIdSelecionado(null);
-  atualizarCor('#ffffff');
-  defineTela('editor');
-}
-const editarCarta = (carta: Cartas) => {
-  defineElementos(carta.dados);
-  defineCartaIdAtual(carta.id);
-  atualizarCor(carta.cor);
-  defineIdSelecionado(null);
-  defineTela('editor');
-}
-  return (
-    <div className="app">
-      <header className='header'>
-        <h1 className='titulo'>Meu TCG</h1>
-      </header>
-    
-    {tela === 'inicial' ?(
-      <Inicial cartasSalvas={cartasSalvas} novaCarta={novaCarta} editarCarta={editarCarta} />
-    ) : (
-      <Editor defineTela={defineTela} elementosAtuais={elementos} idSelecionado={idSelecionado} 
-      selecionarElemento={selecionarId} adicionarElemento={adicionarElemento} modificarElemento={modificarElementos}
-      salvarCarta={salvarCarta} apagarCarta={apagarCarta} duplicarCarta={duplicarCarta} cartaIdAtual={cartaIdAtual}
-      corCarta={corAtual} atualizarCor={atualizarCor} />
-    )}
-      <footer className="footer">
-        <p>CardMaker 2025.</p>
-      </footer>
+  const adicionarElemento= (tipo: 'texto' | 'imagem') =>
+  {
+    const elemento = novoElemento(tipo);
+    defineElementos(elementos => [...elementos, elemento]);
+    defineIdSelecionado(elemento.id);
+  }
+  const modificarElementos= (id: number, chave: string, valor: string | number) => 
+  {
+    defineElementos(prev => prev.map(element => element.id === id? {...element, [chave]: valor} : element));
+  }
+  const novaCarta = () => {
+    defineElementos([]);
+    defineCartaIdAtual(null);
+    defineIdSelecionado(null);
+    atualizarCor('#ffffff');
+    defineTela('editor');
+  }
+  const editarCarta = (carta: Cartas) => {
+    defineElementos(carta.dados);
+    defineCartaIdAtual(carta.id);
+    atualizarCor(carta.cor);
+    defineIdSelecionado(null);
+    defineTela('editor');
+  }
+    return (
+  <div className="app">
+    <header className='header'>
+      <h1 className='titulo'>Meu TCG</h1>
+    </header>
+      
+    {tela === 'baralho' && (
+  <Baralho
+    baralhos={baralhosSalvos}
+    criarBaralho={criarBaralho}
+    abrirBaralho={abrirBaralho}
+  />
+)}
 
-    </div>
-  )
+  {tela === 'inicial' && (
+    <Inicial
+      cartasSalvas={cartasSalvas}
+      novaCarta={novaCarta}
+      editarCarta={editarCarta}
+      voltarMenu={() => defineTela('baralho')}
+    />
+  )}
+
+  {tela === 'editor' && (
+    <Editor
+      defineTela={defineTela}
+      elementosAtuais={elementos}
+      idSelecionado={idSelecionado}
+      selecionarElemento={selecionarId}
+      adicionarElemento={adicionarElemento}
+      modificarElemento={modificarElementos}
+      salvarCarta={salvarCarta}
+      apagarCarta={apagarCarta}
+      duplicarCarta={duplicarCarta}
+      cartaIdAtual={cartaIdAtual}
+      corCarta={corAtual}
+      atualizarCor={atualizarCor}
+    />
+)}
+
+
+    <footer className="footer">
+      <p>CardMaker 2025.</p>
+    </footer>
+  </div>
+)
+
+
 }
 
 export default App
