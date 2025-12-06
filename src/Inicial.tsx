@@ -16,19 +16,32 @@ export default function Inicial({cartasSalvas, novaCarta, editarCarta}: InicialP
         </div>
         <div>
             <h2>Nome do baralho!</h2>
-            <button onClick={() => novaCarta()}>Criar Nova Carta</button>
+            
+
             <div className="exibeCartas">
                 {cartasSalvas.map(c => (
                 <div 
-                key={c.id} 
-                className="cartaInicial" 
-                onClick={() => editarCarta(c)}
+                    key={c.id} 
+                    className="cartaInicial" 
+                    onClick={() => editarCarta(c)}
                 >
+
                 <div className="cartaMiniatura">
+
                     <Carta elementos={c.dados} cor={c.cor} elementoSelecionada={()=>{}}  />
+
                 </div>
+
                 </div>
+
                 ))}
+
+                <div className="cartaInicial novaCarta" onClick={novaCarta}>
+                    <div className="cartaMiniatura">
+                            <div className="cartaPlaceholder">+</div>
+                        </div>
+                    </div>
+                
             </div>
         </div>
     </div>

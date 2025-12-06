@@ -75,11 +75,38 @@
   transform-origin: top left;
 }
 
+.novaCarta {
+  cursor: pointer;
+  border: 2px dashed #aaa;
+  border-radius: 12px;
+  background: #dcdcdc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.25s ease;
+  width: 200px;
+  height: 280px;
+  opacity: 0.85;
+  position: relative; /* necessário pro ajuste */
+}
 
+.novaCarta:hover {
+  opacity: 1;
+  border-color: #666;
+  background: #cfcfcf;
+}
 
-
-
-
+.cartaPlaceholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 95px;
+  font-weight: 700;
+  color: #777;
+  transform: translate(90px, 260px);
+}
 
 
 
