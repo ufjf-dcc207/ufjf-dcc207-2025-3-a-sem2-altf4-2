@@ -10,3 +10,18 @@
     box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.1);
     overflow-x: hidden;
 }
+.cartaInicial {
+  cursor: pointer;
+  width: 200px;
+  height: 280px;
+  overflow: hidden;
+  position: relative;
+}
+
+.cartaMiniatura {
+  width: 400px;
+  height: 560px;
+  transform: scale(0.5);
+  transform-origin: top left;
+  pointer-events: none;
+}
