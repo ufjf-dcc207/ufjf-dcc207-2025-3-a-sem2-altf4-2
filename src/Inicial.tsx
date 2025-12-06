@@ -7,17 +7,21 @@ interface InicialProps {
     novaCarta: () => void;
     editarCarta: (carta: Cartas) => void;
     voltarMenu: () => void;
+    salvarBaralho: () => void;
+    baralhoAtual: Baralho | null;
 }
 
-export default function Inicial({cartasSalvas, novaCarta, editarCarta, voltarMenu}: InicialProps) {
+export default function Inicial({cartasSalvas, novaCarta, editarCarta, voltarMenu, salvarBaralho, baralhoAtual}: InicialProps) {
     return (    
         <div className="inicial">
         <div>
+           
             <h2>Seus Baralhos!</h2>
             <button onClick={voltarMenu}>Voltar</button>
+            <button onClick={salvarBaralho}>Salvar</button>
         </div>
         <div>
-            <h2>Nome do baralho!</h2>
+            <h2> {baralhoAtual?.nome}</h2>
             
 
             <div className="exibeCartas">

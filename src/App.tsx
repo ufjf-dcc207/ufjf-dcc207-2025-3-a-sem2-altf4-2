@@ -1,9 +1,9 @@
 import './App.css'
 import { useState } from 'react'
-import Baralho from './Baralho.tsx'
+import BaralhoTela from './BaralhoTela.tsx'
 import Inicial from './Inicial.tsx'
 import Editor from './Editor.tsx'
-import type { Cartas, Elemento, Baralho as BaralhoTipo } from './Componentes/interfaces.tsx'
+import type { Cartas, Elemento, Baralho} from './Componentes/interfaces.tsx'
 
 
 
@@ -24,9 +24,8 @@ const novoElemento = (tipo: 'texto' | 'imagem'): Elemento => {
 function App() {
   const[tela, defineTela] = useState<'baralho' | 'inicial' | 'editor'>('baralho');
 
-  const [baralhoAtual, defineBaralhoAtual] = useState<BaralhoTipo | null>(null);
-  const[baralhosSalvos, defineBaralhosSalvos] = useState<BaralhoTipo[]>([]);
-  
+  const [baralhoAtual, defineBaralhoAtual] = useState<Baralho | null>(null);
+  const[baralhosSalvos, defineBaralhosSalvos] = useState<Baralho[]>([]);
 
   const[cartasSalvas,defineCartasSalvas] = useState<Cartas[]>([]);
 
@@ -36,7 +35,7 @@ function App() {
   const [idSelecionado, defineIdSelecionado] = useState<number | null>(null);
 
   const criarBaralho = (nome: string) => {
-    const novo: BaralhoTipo = {
+    const novo: Baralho = {
       id: Date.now(),
       nome,
       cartas: []
@@ -44,27 +43,20 @@ function App() {
     defineBaralhosSalvos(prev => [...prev, novo])
   }
   
-  const abrirBaralho = (b: BaralhoTipo) => {
+  const abrirBaralho = (b: Baralho) => {
     defineBaralhoAtual(b);
     defineCartasSalvas(b.cartas);
     defineTela('inicial');
   }
 
-  const salvarBaralho = (cartas: Cartas[]) => {
-  if (!baralhoAtual) return;
+  const salvarBaralho = () => {
+      if (!baralhoAtual) return;
 
-  const atualizado: BaralhoTipo = {
-    id: baralhoAtual.id,
-    nome: baralhoAtual.nome,
-    cartas
-  };
+      baralhoAtual.cartas = cartasSalvas;
+      defineBaralhoAtual(baralhoAtual);
 
-  defineBaralhoAtual(atualizado);
-
-  defineBaralhosSalvos(prev => {
-    return prev.map(item => item.id === atualizado.id ? atualizado : item);
-  });
-};
+      defineBaralhosSalvos(prev => prev.map(item => item.id === baralhoAtual.id ? baralhoAtual : item)) ;
+    }
 
 
   const selecionarId = (id: number) => {
@@ -74,18 +66,18 @@ function App() {
         defineCorAtual(cor);
     }
   const salvarCarta= () => {
-    if(cartaIdAtual) {
-      defineCartasSalvas(prev=>prev.map(carta => carta.id === cartaIdAtual ? {...carta, dados: elementos} : carta));
-    }else{
-    const novaCarta: Cartas = {
-      id: Date.now(),
-      dados: elementos,
-      cor: corAtual
-    };
-    defineCartasSalvas([...cartasSalvas, novaCarta]);
+        if(cartaIdAtual) {
+          defineCartasSalvas(prev=>prev.map(carta => carta.id === cartaIdAtual ? {...carta, dados: elementos} : carta));
+        }else{
+        const novaCarta: Cartas = {
+          id: Date.now(),
+          dados: elementos,
+          cor: corAtual
+        };
+        defineCartasSalvas([...cartasSalvas, novaCarta]);
+        }
+        defineTela('inicial');
   }
-  defineTela('inicial');
-}
   const apagarCarta= ()=> {
     if(cartaIdAtual !== null) {
       defineCartasSalvas(prev=> prev.filter(carta=> carta.id !== cartaIdAtual));
@@ -143,25 +135,28 @@ function App() {
     defineIdSelecionado(null);
     defineTela('editor');
   }
-    return (
+  
+  return (
   <div className="app">
     <header className='header'>
       <h1 className='titulo'>Meu TCG</h1>
     </header>
       
     {tela === 'baralho' && (
-  <Baralho
-    baralhos={baralhosSalvos}
-    criarBaralho={criarBaralho}
-    abrirBaralho={abrirBaralho}
-  />
-)}
+      <BaralhoTela
+        baralhos={baralhosSalvos}
+        criarBaralho={criarBaralho}
+        abrirBaralho={abrirBaralho}
+      />
+    )}
 
   {tela === 'inicial' && (
     <Inicial
       cartasSalvas={cartasSalvas}
       novaCarta={novaCarta}
       editarCarta={editarCarta}
+      salvarBaralho={salvarBaralho}
+      baralhoAtual={baralhoAtual}
       voltarMenu={() => defineTela('baralho')}
     />
   )}
@@ -189,8 +184,6 @@ function App() {
     </footer>
   </div>
 )
-
-
 }
 
 export default App
