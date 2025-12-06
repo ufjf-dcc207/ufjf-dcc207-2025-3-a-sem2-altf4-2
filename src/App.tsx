@@ -54,14 +54,31 @@ const apagarCarta= ()=> {
   }
 }
 
-const duplicarCarta= () => {
-  const cartaDuplicada: Cartas = {
-    id: Date.now(), dados: elementos, cor: corAtual
-  }
-  defineCartaIdAtual(cartaDuplicada.id);
-  defineCartasSalvas([...cartasSalvas, cartaDuplicada]);
+const duplicarCarta = () => {
+  defineCartasSalvas(prev => {
+    if (!prev || prev.length === 0) return prev;
+
+    let indice = cartaIdAtual != null ? prev.findIndex(c => c.id === cartaIdAtual) : -1;
+
+    if (indice === -1) indice = prev.length - 1;
+
+    const cartaOrig = prev[indice];
+    const copia = {
+      id: Date.now(),
+      dados: cartaOrig.dados,
+      cor: cartaOrig.cor
+    };
+
+    const nova = [...prev];
+    nova.splice(indice + 1, 0, copia);
+    return nova;
+  });
+
+  const novoId = Date.now();
+  defineCartaIdAtual(novoId);
   defineTela('inicial');
-}
+};
+
 
 const adicionarElemento= (tipo: 'texto' | 'imagem') =>
 {
