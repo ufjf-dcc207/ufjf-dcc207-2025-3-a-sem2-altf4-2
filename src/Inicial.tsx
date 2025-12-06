@@ -6,14 +6,15 @@ interface InicialProps {
     cartasSalvas: Cartas[];
     novaCarta: () => void;
     editarCarta: (carta: Cartas) => void;
-    voltarMenu?: () => void;
+    voltarMenu: () => void;
 }
 
-export default function Inicial({cartasSalvas, novaCarta, editarCarta}: InicialProps) {
+export default function Inicial({cartasSalvas, novaCarta, editarCarta, voltarMenu}: InicialProps) {
     return (    
         <div className="inicial">
         <div>
             <h2>Seus Baralhos!</h2>
+            <button onClick={voltarMenu}>Voltar</button>
         </div>
         <div>
             <h2>Nome do baralho!</h2>
