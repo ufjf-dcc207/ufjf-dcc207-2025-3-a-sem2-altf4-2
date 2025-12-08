@@ -5,4 +5,6 @@
   place-content: center;
   min-height: 100vh;
 }
-
+body {
+    background-color: rgb(38, 37, 59);
+}
