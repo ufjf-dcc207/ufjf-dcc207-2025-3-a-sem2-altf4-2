@@ -69,7 +69,7 @@ function App() {
     }
   const salvarCarta= () => {
         if(cartaIdAtual) {
-          defineCartasSalvas(prev=>prev.map(carta => carta.id === cartaIdAtual ? {...carta, dados: elementos, carta:corAtual} : carta));
+          defineCartasSalvas(prev=>prev.map(carta => carta.id === cartaIdAtual ? {...carta, dados: elementos, cor:corAtual} : carta));
         }else{
         const novaCarta: Cartas = {
           id: Date.now(),
