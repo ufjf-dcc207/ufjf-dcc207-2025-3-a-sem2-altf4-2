@@ -15,7 +15,7 @@ interface EditorPanelProps {
 
 
 export default function EditorPanel({ elementoAtivo, onAtualizaElemento, onAddElemento, onApagarElemento, cor, onAtualizarCor}: EditorPanelProps) {
-  const [menuAberto, setMenuAberto] = useState(false);
+  const [menuAberto, defineMenuAberto] = useState(false);
   
   const alterarElemento = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => 
   {
@@ -27,7 +27,7 @@ export default function EditorPanel({ elementoAtivo, onAtualizaElemento, onAddEl
 
   const adicionarElemento = (tipo: 'texto' | 'imagem') => {
     onAddElemento(tipo);
-    setMenuAberto(false);
+    defineMenuAberto(false);
   };
 
   return (
@@ -35,7 +35,7 @@ export default function EditorPanel({ elementoAtivo, onAtualizaElemento, onAddEl
 
       <button 
         className="adicionarEditor" 
-        onClick={() => setMenuAberto(!menuAberto)}
+        onClick={() => defineMenuAberto(!menuAberto)}
         title="Adicionar elemento"
       >
       +
