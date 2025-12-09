@@ -14,7 +14,7 @@ interface MesaProps {
 export default function Mesa({cartasSalvas, onNovaCarta, onEditarCarta, onVoltarMenu, onSalvarBaralho, baralhoAtual}: MesaProps) {
     return (    
         <div className="mesa">
-        <div style={{display: 'flex', alignItems: 'center', gap: '10px'}}>
+        <div style={{display: 'flex', alignItems: 'center', gap: '10px', marginTop: '10px'}}>
             <button className='btn-acao voltar' onClick={onVoltarMenu}>Voltar</button>
             <button className='btn-acao salvar' onClick={onSalvarBaralho}>Salvar</button>
         </div>
