@@ -8,7 +8,8 @@ export interface Elemento {
     tamanho: number;
     altura?: number;
     largura?: number;
-
+    espessuraFonte: number;
+    estiloFonte: 'normal' | 'italic';
 }
 
 export interface Cartas{

@@ -29,6 +29,9 @@ export default function EditorInputs({elemento, atualizarElemento, apagarElement
 
                 <label >Tamanho da Fonte</label>
                 <input type="range" min= {8} max={80} name="tamanho" value={elemento.tamanho} onChange={atualizarElemento} />
+
+                <label >Espessura da Fonte</label>
+                <input type = "range" min ={0} max ={1000} name = "espessuraFonte" value = {elemento.espessuraFonte} onChange={atualizarElemento} />
             </>
             )}
             {elemento.tipo === 'imagem' && (

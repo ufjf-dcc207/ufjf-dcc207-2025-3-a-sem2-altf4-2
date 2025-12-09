@@ -17,7 +17,9 @@ export default function Canva({elementos, selecionada}: CanvaProps) {
                 top: `${item.posicaoVertical}px`,
                 color: item.cor,
                 fontSize: `${item.tamanho}px`,
-                cursor: 'pointer'
+                cursor: 'pointer',
+                fontWeight: item.espessuraFonte,
+                fontStyle: item.estiloFonte
                 };
 
                 if(item.tipo === 'imagem') {
