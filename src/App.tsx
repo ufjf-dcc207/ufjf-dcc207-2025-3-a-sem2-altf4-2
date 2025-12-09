@@ -18,6 +18,8 @@ const novoElemento = (tipo: 'texto' | 'imagem'): Elemento => {
     tamanho: tipo === 'texto' ? 16 : 100,
     largura: tipo === 'imagem' ? 100 : undefined,
     altura: tipo === 'imagem' ? 100 : undefined,
+    espessuraFonte: 400,
+    estiloFonte: 'normal'
   }
 }
 
