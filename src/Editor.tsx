@@ -32,7 +32,7 @@ export default function Editor(
         return(    
             <div className="editor">
                 <h2>Editor de Cartas</h2>
-                <button onClick={()=>defineTela("inicial")}>Voltar</button>
+                <button className="btn-acao voltar" onClick={()=>defineTela("inicial")}>Voltar</button>
             
                 <div className="editorCentral">
                     <EditorOpcoes cartaId = {cartaIdAtual} salvarCarta={salvarCarta} apagarCarta={apagarCarta} duplicarCarta={duplicarCarta}/>

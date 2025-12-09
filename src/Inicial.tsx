@@ -15,8 +15,8 @@ export default function Inicial({cartasSalvas, novaCarta, editarCarta, voltarMen
     return (    
         <div className="inicial">
         <div style={{display: 'flex', alignItems: 'center', gap: '10px'}}>
-            <button onClick={voltarMenu}>Voltar</button>
-            <button onClick={salvarBaralho}>Salvar</button>
+            <button className='btn-acao voltar' onClick={voltarMenu}>Voltar</button>
+            <button className='btn-acao salvar' onClick={salvarBaralho}>Salvar</button>
         </div>
         <div>
             <h2> {baralhoAtual?.nome}</h2>
