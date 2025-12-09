@@ -36,15 +36,15 @@
 {
     display: flex;
     color: black;
-    margin-top: 19px;
+    margin-top: 25px;
     position: absolute;
-    width: 200px;
-    padding: 13px;
-    height: 540px;
+    width: 200px;   
+    padding: 10px;
+    height: 380px;
     flex-direction: column;
-    gap: 11px;
+    gap: 6px;
     border: none;
     background: white;
-    border-radius: 13%;
+    border-radius: 5%;
     align-items: center;
 }
