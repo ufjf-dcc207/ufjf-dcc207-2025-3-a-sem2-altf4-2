@@ -7,7 +7,7 @@ import type { Cartas, Elemento, Baralho } from './Componentes/interfaces.tsx'
 
 const novoElemento = (tipo: 'texto' | 'imagem'): Elemento => ({
   id: Date.now(),
-  tipo,
+  tipo:tipo,
   conteudo: tipo === 'texto' ? 'TEXTO' : '',
   posicaoHorizontal: 50,
   posicaoVertical: 50,
@@ -29,7 +29,7 @@ function App() {
   const [elementos, defineElementos] = useState<Elemento[]>([])
   const [idSelecionado, defineIdSelecionado] = useState<number | null>(null)
 
-  const onCriarBaralho = (nome: string) => {
+  const criarBaralho = (nome: string) => {
     const novo: Baralho = {
       id: Date.now(),
       nome,
@@ -38,13 +38,13 @@ function App() {
     defineBaralhosSalvos(prev => [...prev, novo])
   }
 
-  const onAbrirBaralho = (b: Baralho) => {
+  const abrirBaralho = (b: Baralho) => {
     defineBaralhoAtual(b)
     defineCartasSalvas(b.cartas)
     defineTela('mesa')
   }
 
-  const onSalvarBaralho = () => {
+  const salvarBaralho = () => {
     if (!baralhoAtual) return
     baralhoAtual.cartas = cartasSalvas
     defineBaralhosSalvos(prev =>
@@ -52,15 +52,29 @@ function App() {
     )
   }
 
-  const onSelecionarElemento = (id: number) => {
+  const selecionarElemento = (id: number) => {
     defineIdSelecionado(id)
   }
 
-  const onAtualizarCor = (cor: string) => {
+  const atualizarCor = (cor: string) => {
     defineCorAtual(cor)
   }
+ const novaCarta = () => {
+    defineElementos([])
+    defineCartaIdAtual(null)
+    defineIdSelecionado(null)
+    defineCorAtual('#ffffff')
+    defineTela('editor')
+  }
 
-  const onSalvarCarta = () => {
+  const editarCarta = (carta: Cartas) => {
+    defineElementos(carta.dados)
+    defineCartaIdAtual(carta.id)
+    defineCorAtual(carta.cor)
+    defineIdSelecionado(null)
+    defineTela('editor')
+  }
+  const salvarCarta = () => {
     if (cartaIdAtual) {
       defineCartasSalvas(prev =>
         prev.map(carta =>
@@ -81,7 +95,7 @@ function App() {
     defineTela('mesa')
   }
 
-  const onApagarCarta = () => {
+  const apagarCarta = () => {
     if (cartaIdAtual !== null) {
       defineCartasSalvas(prev =>
         prev.filter(carta => carta.id !== cartaIdAtual)
@@ -90,7 +104,7 @@ function App() {
     }
   }
 
-  const onDuplicarCarta = () => {
+  const duplicarCarta = () => {
     if (cartaIdAtual !== null) {
       defineCartasSalvas(prev => {
         const indice = prev.findIndex(c => c.id === cartaIdAtual)
@@ -112,38 +126,24 @@ function App() {
     }
   }
 
-  const onAdicionarElemento = (tipo: 'texto' | 'imagem') => {
+  const adicionarElemento = (tipo: 'texto' | 'imagem') => {
     const elem = novoElemento(tipo)
     defineElementos(prev => [...prev, elem])
     defineIdSelecionado(elem.id)
   }
 
-  const onModificarElemento = (id: number, chave: string, valor: string | number) => {
+  const modificarElemento = (id: number, chave: string, valor: string | number) => {
     defineElementos(prev =>
       prev.map(e => (e.id === id ? { ...e, [chave]: valor } : e))
     )
   }
 
-  const onApagarElemento = (id: number) => {
+  const apagarElemento = (id: number) => {
     defineElementos(prev => prev.filter(e => e.id !== id))
     defineIdSelecionado(null)
   }
 
-  const onNovaCarta = () => {
-    defineElementos([])
-    defineCartaIdAtual(null)
-    defineIdSelecionado(null)
-    defineCorAtual('#ffffff')
-    defineTela('editor')
-  }
-
-  const onEditarCarta = (carta: Cartas) => {
-    defineElementos(carta.dados)
-    defineCartaIdAtual(carta.id)
-    defineCorAtual(carta.cor)
-    defineIdSelecionado(null)
-    defineTela('editor')
-  }
+ 
 
   return (
     <div className="app">
@@ -154,17 +154,17 @@ function App() {
       {tela === 'baralho' && (
         <BaralhoTela
           baralhos={baralhosSalvos}
-          onCriarBaralho={onCriarBaralho}
-          onAbrirBaralho={onAbrirBaralho}
+          onCriarBaralho={criarBaralho}
+          onAbrirBaralho={abrirBaralho}
         />
       )}
 
       {tela === 'mesa' && (
         <Mesa
           cartasSalvas={cartasSalvas}
-          onNovaCarta={onNovaCarta}
-          onEditarCarta={onEditarCarta}
-          onSalvarBaralho={onSalvarBaralho}
+          onNovaCarta={novaCarta}
+          onEditarCarta={editarCarta}
+          onSalvarBaralho={salvarBaralho}
           onVoltarMenu={() => defineTela('baralho')}
           baralhoAtual={baralhoAtual}
         />
@@ -175,16 +175,16 @@ function App() {
           defineTela={defineTela}
           elementosAtuais={elementos}
           idSelecionado={idSelecionado}
-          selecionarElemento={onSelecionarElemento}
-          adicionarElemento={onAdicionarElemento}
-          modificarElemento={onModificarElemento}
-          salvarCarta={onSalvarCarta}
-          apagarCarta={onApagarCarta}
-          duplicarCarta={onDuplicarCarta}
+          selecionarElemento={selecionarElemento}
+          adicionarElemento={adicionarElemento}
+          modificarElemento={modificarElemento}
+          salvarCarta={salvarCarta}
+          apagarCarta={apagarCarta}
+          duplicarCarta={duplicarCarta}
           cartaIdAtual={cartaIdAtual}
           corCarta={corAtual}
-          atualizarCor={onAtualizarCor}
-          apagarElemento={onApagarElemento}
+          atualizarCor={atualizarCor}
+          apagarElemento={apagarElemento}
         />
       )}
 

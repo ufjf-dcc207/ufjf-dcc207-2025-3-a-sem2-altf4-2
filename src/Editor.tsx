@@ -6,7 +6,7 @@ import EditorOpcoes from "./Componentes/EditorOpcoes";
 
 
 export interface EditorProps {
-    defineTela: (tela: 'inicial' | 'editor') => void;
+    defineTela: (tela: 'mesa' | 'editor') => void;
     elementosAtuais: Elemento[];
     idSelecionado?: number | null;
     selecionarElemento: (id: number) => void;
@@ -32,7 +32,7 @@ export default function Editor(
         return(    
             <div className="editor">
                 <h2>Editor de Cartas</h2>
-                <button className="btn-acao voltar" onClick={()=>defineTela("inicial")}>Voltar</button>
+                <button className="btn-acao voltar" onClick={()=>defineTela("mesa")}>Voltar</button>
             
                 <div className="editorCentral">
                     <EditorOpcoes cartaId = {cartaIdAtual} salvarCarta={salvarCarta} apagarCarta={apagarCarta} duplicarCarta={duplicarCarta}/>

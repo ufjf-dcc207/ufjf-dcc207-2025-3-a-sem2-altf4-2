@@ -3,16 +3,16 @@ import type { Baralho } from "./Componentes/interfaces";
 
 interface Props {
   baralhos: Baralho[];
-  criarBaralho: (nome: string) => void;
-  abrirBaralho: (b: Baralho) => void;
+  onCriarBaralho: (nome: string) => void;
+  onAbrirBaralho: (b: Baralho) => void;
 }
 
-export default function BaralhoTela({ baralhos, criarBaralho, abrirBaralho }: Props) {
+export default function BaralhoTela({ baralhos, onCriarBaralho, onAbrirBaralho }: Props) {
   const [nomeDigitado, setNomeDigitado] = useState("");
 
   const confirmarCriacao = () => {
     if (nomeDigitado.trim() === "") return;
-    criarBaralho(nomeDigitado.trim());
+    onCriarBaralho(nomeDigitado.trim());
     setNomeDigitado("");
   };
 
@@ -44,7 +44,7 @@ export default function BaralhoTela({ baralhos, criarBaralho, abrirBaralho }: Pr
           <div
             key={b.id}
             className="item-baralho"
-            onClick={() => abrirBaralho(b)}
+            onClick={() => onAbrirBaralho(b)}
           >
             <p>{b.nome}</p>
             <small>{b.cartas.length} cartas</small>
