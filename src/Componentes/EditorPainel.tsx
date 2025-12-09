@@ -8,16 +8,16 @@ interface EditorPanelProps {
   elementoAtivo?: Elemento;
   onAtualizaElemento: (id: number, chave: string, valor: string | number) => void;
   onAddElemento: (tipo: 'texto' | 'imagem') => void;
-  apagarElemento: (id: number) => void;
+  onApagarElemento: (id: number) => void;
   cor: string;
-  atualizarCor: (cor: string) => void;
+  onAtualizarCor: (cor: string) => void;
 }
 
 
-export default function EditorPanel({ elementoAtivo, onAtualizaElemento, onAddElemento, apagarElemento, cor, atualizarCor}: EditorPanelProps) {
+export default function EditorPanel({ elementoAtivo, onAtualizaElemento, onAddElemento, onApagarElemento, cor, onAtualizarCor}: EditorPanelProps) {
   const [menuAberto, setMenuAberto] = useState(false);
   
-  const SelecionaElemento = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => 
+  const alterarElemento = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => 
   {
     const { name, value } = e.target;
     if (elementoAtivo) {
@@ -47,13 +47,13 @@ export default function EditorPanel({ elementoAtivo, onAtualizaElemento, onAddEl
           <button onClick={() => adicionarElemento('imagem')}>🖼️ Adicionar Imagem</button>
           <div style={{display: 'flex', flexDirection: 'row', gap: ' 10px' }}>
           <p>Cor da Carta:</p> 
-          <input style={{display: 'inline'}} type="color" name="corCarta" value={cor} onChange={e => atualizarCor(e.target.value)}/>
+          <input style={{display: 'inline'}} type="color" name="corCarta" value={cor} onChange={e => onAtualizarCor(e.target.value)}/>
           </div>
          
         </div>
       )}
 
-      {elementoAtivo && <EditorInputs elemento={elementoAtivo} atualizarElemento={SelecionaElemento} apagarElemento={apagarElemento} />}
+      {elementoAtivo && <EditorInputs elemento={elementoAtivo} onAlterarElemento={alterarElemento} onApagarElemento={onApagarElemento} />}
     </div>
   );
 }

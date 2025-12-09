@@ -6,48 +6,48 @@ import EditorOpcoes from "./Componentes/EditorOpcoes";
 
 
 export interface EditorProps {
-    defineTela: (tela: 'mesa' | 'editor') => void;
+    onDefineTela: (tela: 'mesa' | 'editor') => void;
     elementosAtuais: Elemento[];
     idSelecionado?: number | null;
-    selecionarElemento: (id: number) => void;
-    adicionarElemento: (tipo: 'texto' | 'imagem') => void;
-    modificarElemento: (id: number, chave: string, valor: string | number) => void;
-    salvarCarta: () => void;
-    apagarCarta: () => void;
-    duplicarCarta: () => void;
+    onSelecionarElemento: (id: number) => void;
+    onAdicionarElemento: (tipo: 'texto' | 'imagem') => void;
+    onModificarElemento: (id: number, chave: string, valor: string | number) => void;
+    onSalvarCarta: () => void;
+    onApagarCarta: () => void;
+    onDuplicarCarta: () => void;
     cartaIdAtual:number | null;
     corCarta: string;
-    atualizarCor: (cor: string) => void;
-    apagarElemento: (id: number) => void;
+    onAtualizarCor: (cor: string) => void;
+    onApagarElemento: (id: number) => void;
 }
 
 export default function Editor(
-    {defineTela,elementosAtuais,idSelecionado,
-    selecionarElemento, adicionarElemento, modificarElemento, 
-    salvarCarta, apagarCarta, duplicarCarta, cartaIdAtual,
-    corCarta,atualizarCor, apagarElemento}:
+    {onDefineTela,elementosAtuais,idSelecionado,onSelecionarElemento,
+    onAdicionarElemento, onModificarElemento, onSalvarCarta,
+    onApagarCarta, onDuplicarCarta, cartaIdAtual, corCarta,
+    onAtualizarCor, onApagarElemento}:
     EditorProps) 
     {
         const elementoSelecionado = elementosAtuais.find(element => element.id === idSelecionado);
         return(    
             <div className="editor">
                 <h2>Editor de Cartas</h2>
-                <button className="btn-acao voltar" onClick={()=>defineTela("mesa")}>Voltar</button>
+                <button className="btn-acao voltar" onClick={()=>onDefineTela("mesa")}>Voltar</button>
             
                 <div className="editorCentral">
-                    <EditorOpcoes cartaId = {cartaIdAtual} salvarCarta={salvarCarta} apagarCarta={apagarCarta} duplicarCarta={duplicarCarta}/>
+                    <EditorOpcoes cartaId = {cartaIdAtual} salvarCarta={onSalvarCarta} apagarCarta={onApagarCarta} duplicarCarta={onDuplicarCarta}/>
                    
                     
 
-                    <Carta elementos={elementosAtuais} elementoSelecionada={selecionarElemento} cor={corCarta}/>
+                    <Carta elementos={elementosAtuais} onSelecionarElemento={onSelecionarElemento} cor={corCarta}/>
                     
                     <EditorPanel
-                    onAddElemento={adicionarElemento}
-                    onAtualizaElemento={modificarElemento}
+                    onAddElemento={onAdicionarElemento}
+                    onAtualizaElemento={onModificarElemento}
                     elementoAtivo={elementoSelecionado}
-                    apagarElemento={apagarElemento}
+                    onApagarElemento={onApagarElemento}
                     cor={corCarta}
-                    atualizarCor={atualizarCor}
+                    onAtualizarCor={onAtualizarCor}
                     />
                     
                 </div>

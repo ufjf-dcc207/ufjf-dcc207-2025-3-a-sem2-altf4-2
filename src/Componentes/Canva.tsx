@@ -3,11 +3,11 @@ import type { Elemento } from "./interfaces.tsx";
 
 interface CanvaProps {
     elementos: Elemento[];
-    selecionada: (id: number) => void;
+    onSelecionar: (id: number) => void;
 }
 
-export default function Canva({elementos, selecionada}: CanvaProps) {
-    if (elementos.length === 0) return <div className="vazio">Adicione algo...</div>;
+export default function Canva({elementos, onSelecionar}: CanvaProps) {
+    if (elementos.length === 0) return <div className="vazio" style={{color: "gray"}}>Adicione algo...</div>;
     return (
         <div >
             {elementos.map((item) => {
@@ -32,9 +32,9 @@ export default function Canva({elementos, selecionada}: CanvaProps) {
                         cursor: 'pointer',
                         
                     };
-                    return <img key={item.id} src={item.conteudo} style={imgStyle} onClick={() => selecionada(item.id)} />;
+                    return <img key={item.id} src={item.conteudo} style={imgStyle} onClick={() => onSelecionar(item.id)} />;
                 }
-                return <div key={item.id} style={style} onClick={() => selecionada(item.id)}>{item.conteudo}</div>;
+                return <div key={item.id} style={style} onClick={() => onSelecionar(item.id)}>{item.conteudo}</div>;
             })}
             
         </div>

@@ -5,18 +5,18 @@ import type {CSSProperties } from "react";
 
 interface CartaComponenteProps {
     elementos: Elemento[];
-    elementoSelecionada: (id:number)=>void;
+    onSelecionarElemento: (id:number)=>void;
     cor: string;
 }  
 
-export default function Carta({elementos, elementoSelecionada, cor}:CartaComponenteProps) {
+export default function Carta({elementos, onSelecionarElemento, cor}:CartaComponenteProps) {
 
     const style : CSSProperties = {
         backgroundColor: cor,
     }
     return (
         <div className="carta" style={style}>
-            <Canva elementos={elementos} selecionada={elementoSelecionada} />
+            <Canva elementos={elementos} onSelecionar={onSelecionarElemento} />
         </div>
     );
 }

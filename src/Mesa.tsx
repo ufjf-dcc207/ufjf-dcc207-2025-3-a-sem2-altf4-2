@@ -32,7 +32,7 @@ export default function Mesa({cartasSalvas, onNovaCarta, onEditarCarta, onVoltar
 
                 <div className="cartaMiniatura">
 
-                    <Carta elementos={c.dados} cor={c.cor} elementoSelecionada={()=>{}}  />
+                    <Carta elementos={c.dados} cor={c.cor} onSelecionarElemento={()=>{}}  />
 
                 </div>
 
@@ -42,9 +42,9 @@ export default function Mesa({cartasSalvas, onNovaCarta, onEditarCarta, onVoltar
 
                 <div className="cartaInicial novaCarta" onClick={onNovaCarta}>
                     <div className="cartaMiniatura">
-                            <div className="cartaPlaceholder">+</div>
-                        </div>
+                        <div className="cartaPlaceholder">+</div>
                     </div>
+                </div>
                 
             </div>
         </div>

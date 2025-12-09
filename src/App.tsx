@@ -12,7 +12,7 @@ const novoElemento = (tipo: 'texto' | 'imagem'): Elemento => ({
   posicaoHorizontal: 50,
   posicaoVertical: 50,
   cor: '#000000',
-  tamanho: tipo === 'texto' ? 16 : 100,
+  tamanho: 16,
   largura: tipo === 'imagem' ? 100 : undefined,
   altura: tipo === 'imagem' ? 100 : undefined,
   espessuraFonte: 400,
@@ -162,29 +162,29 @@ function App() {
       {tela === 'mesa' && (
         <Mesa
           cartasSalvas={cartasSalvas}
+          baralhoAtual={baralhoAtual}
           onNovaCarta={novaCarta}
           onEditarCarta={editarCarta}
           onSalvarBaralho={salvarBaralho}
           onVoltarMenu={() => defineTela('baralho')}
-          baralhoAtual={baralhoAtual}
         />
       )}
 
       {tela === 'editor' && (
         <Editor
-          defineTela={defineTela}
-          elementosAtuais={elementos}
-          idSelecionado={idSelecionado}
-          selecionarElemento={selecionarElemento}
-          adicionarElemento={adicionarElemento}
-          modificarElemento={modificarElemento}
-          salvarCarta={salvarCarta}
-          apagarCarta={apagarCarta}
-          duplicarCarta={duplicarCarta}
+          onDefineTela={defineTela}
+          onSelecionarElemento={selecionarElemento}
+          onAdicionarElemento={adicionarElemento}
+          onModificarElemento={modificarElemento}
+          onSalvarCarta={salvarCarta}
+          onApagarCarta={apagarCarta}
+          onDuplicarCarta={duplicarCarta}
+          onAtualizarCor={atualizarCor}
+          onApagarElemento={apagarElemento}
           cartaIdAtual={cartaIdAtual}
           corCarta={corAtual}
-          atualizarCor={atualizarCor}
-          apagarElemento={apagarElemento}
+          elementosAtuais={elementos}
+          idSelecionado={idSelecionado}
         />
       )}
 
