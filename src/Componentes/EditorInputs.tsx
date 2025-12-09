@@ -47,12 +47,6 @@ export default function EditorInputs({elemento, atualizarElemento, apagarElement
 
                 <label>Largura</label>
                 <input type="range" name="largura" min={5} max={400} value={elemento.largura || 100} onChange={atualizarElemento} /> 
-
-                <label>Distorcer imagem?</label>
-                <select name="destorceImagem" value={elemento.destorceImagem ? "sim" : "nao"} onChange={atualizarElemento}>
-                    <option value="sim">Sim</option>
-                    <option value="nao">Não</option>
-                </select> 
             </>
             )}
             <button onClick={() => apagarElemento(elemento.id)}>🗑️</button>
