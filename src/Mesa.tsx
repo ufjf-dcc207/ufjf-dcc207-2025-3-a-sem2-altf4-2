@@ -2,21 +2,21 @@
 import type {Baralho, Cartas} from './Componentes/interfaces.tsx';
 import Carta from './Componentes/Carta.tsx';
 
-interface InicialProps {
+interface MesaProps {
     cartasSalvas: Cartas[];
-    novaCarta: () => void;
-    editarCarta: (carta: Cartas) => void;
-    voltarMenu: () => void;
-    salvarBaralho: () => void;
+    onNovaCarta: () => void;
+    onEditarCarta: (carta: Cartas) => void;
+    onVoltarMenu: () => void;
+    onSalvarBaralho: () => void;
     baralhoAtual: Baralho | null;
 }
 
-export default function Inicial({cartasSalvas, novaCarta, editarCarta, voltarMenu, salvarBaralho, baralhoAtual}: InicialProps) {
+export default function Mesa({cartasSalvas, onNovaCarta, onEditarCarta, onVoltarMenu, onSalvarBaralho, baralhoAtual}: MesaProps) {
     return (    
-        <div className="inicial">
+        <div className="mesa">
         <div style={{display: 'flex', alignItems: 'center', gap: '10px'}}>
-            <button className='btn-acao voltar' onClick={voltarMenu}>Voltar</button>
-            <button className='btn-acao salvar' onClick={salvarBaralho}>Salvar</button>
+            <button className='btn-acao voltar' onClick={onVoltarMenu}>Voltar</button>
+            <button className='btn-acao salvar' onClick={onSalvarBaralho}>Salvar</button>
         </div>
         <div>
             <h2> {baralhoAtual?.nome}</h2>
@@ -27,7 +27,7 @@ export default function Inicial({cartasSalvas, novaCarta, editarCarta, voltarMen
                 <div 
                     key={c.id} 
                     className="cartaInicial" 
-                    onClick={() => editarCarta(c)}
+                    onClick={() => onEditarCarta(c)}
                 >
 
                 <div className="cartaMiniatura">
@@ -40,7 +40,7 @@ export default function Inicial({cartasSalvas, novaCarta, editarCarta, voltarMen
 
                 ))}
 
-                <div className="cartaInicial novaCarta" onClick={novaCarta}>
+                <div className="cartaInicial novaCarta" onClick={onNovaCarta}>
                     <div className="cartaMiniatura">
                             <div className="cartaPlaceholder">+</div>
                         </div>
