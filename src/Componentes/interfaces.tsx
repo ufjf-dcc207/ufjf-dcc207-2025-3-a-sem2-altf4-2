@@ -10,6 +10,7 @@ export interface Elemento {
     largura?: number;
     espessuraFonte: number;
     estiloFonte: 'normal' | 'italic';
+    destorceImagem: boolean;
 }
 
 export interface Cartas{

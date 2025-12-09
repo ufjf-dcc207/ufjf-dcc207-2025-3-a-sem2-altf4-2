@@ -30,7 +30,8 @@ export default function Canva({elementos, selecionada}: CanvaProps) {
                         width: item.largura ? `${item.largura}px` : '100px',
                         height: item.altura ? `${item.altura}px` : '100px',
                         cursor: 'pointer',
-                        objectFit: 'fill'
+                        objectFit: item.destorceImagem ? 'fill' : 'contain',
+                        
                     };
                     return <img key={item.id} src={item.conteudo} style={imgStyle} onClick={() => selecionada(item.id)} />;
                 }
