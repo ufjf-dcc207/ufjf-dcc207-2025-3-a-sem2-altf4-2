@@ -4,7 +4,7 @@ import type { ChangeEvent } from "react";
 interface EditorInputsProps
 {
     elemento: Elemento;
-    atualizarElemento: (e: ChangeEvent<HTMLInputElement>) => void;
+    atualizarElemento: (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
     apagarElemento: (id: number) => void;
 }
 
@@ -32,6 +32,12 @@ export default function EditorInputs({elemento, atualizarElemento, apagarElement
 
                 <label >Espessura da Fonte</label>
                 <input type = "range" min ={0} max ={1000} name = "espessuraFonte" value = {elemento.espessuraFonte} onChange={atualizarElemento} />
+
+                <label>Estilo da Fonte</label>
+                <select name="estiloFonte" value={elemento.estiloFonte} onChange={atualizarElemento}>
+                    <option value="normal">Normal</option>
+                    <option value="italic">Itálico</option>
+                </select>
             </>
             )}
             {elemento.tipo === 'imagem' && (
